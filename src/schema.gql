@@ -1,0 +1,64 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @key(fields: String!) on OBJECT | INTERFACE
+
+directive @extends on OBJECT | INTERFACE
+
+directive @external on OBJECT | FIELD_DEFINITION
+
+directive @requires(fields: String!) on FIELD_DEFINITION
+
+directive @provides(fields: String!) on FIELD_DEFINITION
+
+type PageInfo {
+  currentPage: Int!
+  pageSize: Int!
+  totalPage: Int!
+}
+
+type GetListProductOrderData {
+  id: String!
+  name: String!
+  sku: String!
+  sales: Float!
+  totalQty: Float!
+}
+
+type GetListProductOrderResponse {
+  count: Int!
+  pageInfo: PageInfo!
+  data: [GetListProductOrderData!]
+}
+
+type CreateOrderResponse {
+  success: Boolean!
+}
+
+type GetOrderData {
+  productName: String!
+  productSku: String!
+  productType: String!
+  qty: Float!
+}
+
+type GetOrderResponse {
+  count: Int!
+  pageInfo: PageInfo!
+  data: [GetOrderData!]
+}
+
+type Query {
+  getOrderProductList(pageSize: Int = 10, currentPage: Int = 1, globalSearch: String!, orderType: String = "asc", orderBy: String = "name"): GetListProductOrderResponse!
+  getOrderList(pageSize: Int = 10, currentPage: Int = 1, orderType: String = "asc", orderBy: String = "name"): GetOrderResponse!
+}
+
+type Mutation {
+  createOrder(input: CreateOrderRequest!): CreateOrderResponse!
+}
+
+input CreateOrderRequest {
+  productId: String!
+  qty: Float!
+}
